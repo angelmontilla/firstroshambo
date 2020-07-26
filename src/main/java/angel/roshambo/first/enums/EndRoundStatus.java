@@ -5,7 +5,7 @@
 package angel.roshambo.first.enums;
 
 /**
- * <strong>EndGameStatus</strong> Enumerated that describes end-game status.
+ * <strong>EndRoundStatus</strong> Enumerated that describes end-game status.
  * <p>It represents the way game has ended.<br>Extends {@link java.lang.Enum}</p>
  * <p>In the same sense, it converts status toString() for console representation</p>
  * <p>Allowed values</p>
@@ -19,12 +19,12 @@ package angel.roshambo.first.enums;
  * @version 0.1
  * @see java.lang.Enum
  */
-public enum EndGameStatus {
+public enum EndRoundStatus {
     FIRST("First"), SECOND("Second"), DRAW("Draw"), UNKNOWN("Unknown");
     
     private final String status;
     
-    EndGameStatus(String status) {
+    EndRoundStatus(String status) {
         this.status = status;
     }
     

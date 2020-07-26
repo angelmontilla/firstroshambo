@@ -11,15 +11,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import static angel.roshambo.first.enums.EndGameStatus.*;
+import static angel.roshambo.first.enums.EndRoundStatus.*;
 
 /**
  *
  * @author Angel
  */
-public class EndGameStatusTest {
+public class EndRoundStatusTest {
     
-    public EndGameStatusTest() {
+    public EndRoundStatusTest() {
     }
     
     @BeforeClass
@@ -39,31 +39,31 @@ public class EndGameStatusTest {
     }
 
     /**
-     * Test of values method, of class EndGameStatus.
+     * Test of values method, of class EndRoundStatus.
      */
     @Test
     public void testValues() {
         System.out.println("values");
-        EndGameStatus[] expResult = {FIRST, SECOND, DRAW, UNKNOWN};                   
-        EndGameStatus[] result = EndGameStatus.values();
+        EndRoundStatus[] expResult = {FIRST, SECOND, DRAW, UNKNOWN};                   
+        EndRoundStatus[] result = EndRoundStatus.values();
         
         assertArrayEquals(expResult, result);
     }
 
     /**
-     * Test of valueOf method, of class EndGameStatus.
+     * Test of valueOf method, of class EndRoundStatus.
      */
     @Test
     public void testValueOf() {
         System.out.println("valueOf");
         String name = "FIRST";
-        EndGameStatus expResult = FIRST;
-        EndGameStatus result = EndGameStatus.valueOf(name);
+        EndRoundStatus expResult = FIRST;
+        EndRoundStatus result = EndRoundStatus.valueOf(name);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of toString method, of class EndGameStatus.
+     * Test of toString method, of class EndRoundStatus.
      */
     @Test
     public void testToString() {
@@ -71,10 +71,10 @@ public class EndGameStatusTest {
 
         String expResult = "";
         
-        for (EndGameStatus egs: EndGameStatus.values())
+        for (EndRoundStatus egs: EndRoundStatus.values())
             expResult += " " + egs.toString();
         
-        EndGameStatus instance = FIRST;
+        EndRoundStatus instance = FIRST;
         String result = " " + instance.toString();
         instance = SECOND;
         result += " " + instance.toString();
