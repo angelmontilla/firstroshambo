@@ -10,7 +10,7 @@ Considerations
 * User send round to server -> getting a result
 * Result is stored locally -> A table stores results
 * When user press "Restart game" -> Internal table remove results
-* It is not necessary a backend design pattern. Because it's so simple.
+* It is not necessary a backend finite state machine or strategy design pattern. Because it's so simple.
 
 ---
 
