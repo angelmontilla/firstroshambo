@@ -5,31 +5,39 @@
 package angel.roshambo.first.round;
 
 import angel.roshambo.first.roundresult.RoundResult;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import angel.roshambo.first.enums.EndRoundState;
 import reactor.core.publisher.Mono;
 
 /**
- *
+ * <strong>RoundService</strong> Service o component for resolve Roshambo requests
+ * <p>In the first aproach to Roshambo with no state machine it's so simple</p>
  * @author Angel
+ * @see RoundResult
+ * @see GameLogic
  */
 @Service
 public class RoundService {
-    
-    
-    @Async
+
+    /**
+     * <strong>whoIsWinner</strong>
+     * @param moves - moves recieved from player
+     * @return Mono - that preserves move and result
+     * @see RoundResult
+     */
     public Mono<RoundResult> whoIsWinner(Round moves){
         Mono<RoundResult> res;
         
+        
+        
         RoundResult rrRes = new RoundResult();
         
-        rrRes.firstUser = moves.firstPlayer;
-        rrRes.firstUser = moves.secondPlayer;
-        rrRes.roundResult = EndRoundState.FIRST;
+        rrRes.setFirstUser(moves.getFirstPlayer());
+        rrRes.setSecondUser(moves.getSecondPlayer());
+        rrRes.setRoundResult(EndRoundState.FIRST);
         
-        res = Mono.just(new RoundResult());
+        res = Mono.just(rrRes);
         
         return res;
     }

@@ -72,7 +72,16 @@ public enum RoundValue {
         if (value<0 || value>3)
             throw new IllegalArgumentException("RoundValue valueOf(): can't create enum with not allowed values");
         
-        return (RoundValue) internalMap.get(value);
+        return (RoundValue)internalMap.get(value);
+    }
+    
+    /**
+     *
+     * @param value
+     * @return
+     */
+    public static RoundValue valueOfString(String value) {
+        return (RoundValue)internalMap.get(0);
     }
     
     /**

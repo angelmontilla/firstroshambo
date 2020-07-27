@@ -5,6 +5,7 @@
 package angel.roshambo.first.round;
 
 import angel.roshambo.first.enums.RoundValue;
+import lombok.Data;
 
 /**
  * <strong>Round</strong> Following DTO design pattern a Round representation
@@ -12,7 +13,8 @@ import angel.roshambo.first.enums.RoundValue;
  * <p>It is more simple representation</p>
  * @author Angel
  */
+@Data
 public class Round {
-    public RoundValue firstPlayer;
-    public RoundValue secondPlayer;
+    private RoundValue firstPlayer;
+    private RoundValue secondPlayer;
 }

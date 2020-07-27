@@ -16,6 +16,8 @@ import reactor.core.publisher.Mono;
 
 import angel.roshambo.first.enums.RoundValue;
 import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <b>RoundRestController</b> Is a Rest controller for getting a round result.
@@ -25,40 +27,26 @@ import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
  * @author Angel
  */
 @RestController()
-@RequestMapping(path="/roshambo", 
-                consumes=MediaType.APPLICATION_JSON_VALUE,
-                produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path="/roshambo")
 public class RoundRestController {
     
     @Autowired
     private RoundService theService;
     
     /**
-     * <strong>theRound</strong> 
-     * @param <error>
-     * @param firstPlayer
-     * @param secondPlayer
-     * @return 
-     */
-//    @RequestMapping(value="/playround/{first}/{second}", method = RequestMethod.GET, produces = "" )
-//    @ResponseBody
-//    public Mono<RoundResult> theRound(@PathVariable String firstPlayer, @PathVariable String secondPlayer) {
-//        
-//    }
-    
-
-    /**
-     * 
-     * @param firstMove
+     * <strong>playround</strong>
+     * @param firstMove - Integer that represents
      * @param secondMove
      * @return 
      */
     @GetMapping("/playround")
     @ResponseBody
-    public Mono<RoundResult> theRound(@RequestParam(value="r1") String firstMove, @RequestParam(value="r2", defaultValue = "ROCK") String secondMove) {
+    public Mono<RoundResult> theRound(@RequestParam(value="r1", required = true) Integer firstMove, @RequestParam(value="r2", defaultValue = "0") Integer secondMove) {
         Round round = new Round();
         RoundValue rv1;
         RoundValue rv2;
+        
+        Logger.getLogger("REST").log(Level.INFO, "Request arrived!");
         
         try {
             rv1 = RoundValue.valueOf(firstMove);
@@ -73,13 +61,14 @@ public class RoundRestController {
         }
         
         if (rv1 != UNKNOWN && rv2 != UNKNOWN) {
-            round.firstPlayer = rv1;
-            round.secondPlayer = rv2;
+            round.setFirstPlayer(rv1);
+            round.setSecondPlayer(rv2);
         } else {
-            
+            Logger.getLogger("REST").log(Level.INFO, "Request killed!");
+            return null;
         }
         
-               
+        Logger.getLogger("REST GAME CONTROLLER").log(Level.INFO, "Request SEND To Service!");
         return theService.whoIsWinner(round);
     }
     

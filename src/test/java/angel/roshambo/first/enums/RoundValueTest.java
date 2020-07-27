@@ -4,12 +4,14 @@
  */
 package angel.roshambo.first.enums;
 
+import static angel.roshambo.first.enums.RoundValue.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  *
@@ -43,12 +45,10 @@ public class RoundValueTest {
      */
     @Test
     public void testValues() {
-        System.out.println("values");
-        RoundValue[] expResult = null;
+        System.out.println("TESTING values()");
+        RoundValue[] expResult = {ROCK, PAPER, SCISSORS, UNKNOWN};
         RoundValue[] result = RoundValue.values();
         assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,13 +56,38 @@ public class RoundValueTest {
      */
     @Test
     public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        RoundValue expResult = null;
-        RoundValue result = RoundValue.valueOf(name);
+        System.out.println("TESTING valueOf()");
+
+        RoundValue expResult = ROCK;
+        RoundValue result = RoundValue.valueOf(0);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        expResult = PAPER;
+        result = RoundValue.valueOf(1);
+        assertEquals(expResult, result);
+        
+        expResult = SCISSORS;
+        result = RoundValue.valueOf(2);
+        assertEquals(expResult, result);        
+        
+        expResult = UNKNOWN;
+        result = RoundValue.valueOf(1);
+        assertNotEquals(expResult, result);
+    }
+
+    /**
+     * Test ValueOf exceptions
+     */
+    @Test
+    public void testExceptionValueOf() {
+        System.out.println("TESTING ValueOf exception");
+        
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            RoundValue iR = RoundValue.valueOf(-1);
+        });
+        
+        assertTrue(exception.getMessage().contains("can't create enum with not allowed values"));       
+
     }
 
     /**
@@ -70,13 +95,22 @@ public class RoundValueTest {
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        RoundValue instance = null;
-        String expResult = "";
+        System.out.println("TESTING toString()");
+        
+        RoundValue instance = ROCK;
+        String expResult = "Rock";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance = PAPER;
+        expResult = "Paper";
+        result = instance.toString();
+        assertEquals(expResult, result);
+        
+        instance = valueOf(2);
+        expResult = "Scissors";
+        result = instance.toString();
+        assertEquals(expResult, result);        
     }
     
 }

@@ -6,13 +6,15 @@ package angel.roshambo.first.roundresult;
 
 import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.enums.RoundValue;
+import lombok.Data;
 
 /**
  *
  * @author Angel
  */
+@Data
 public class RoundResult {
-    public RoundValue firstUser;
-    public RoundValue secondUser;
-    public EndRoundState roundResult;
+    private RoundValue firstUser;
+    private RoundValue secondUser;
+    private EndRoundState roundResult;
 }
