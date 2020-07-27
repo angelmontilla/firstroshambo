@@ -4,6 +4,7 @@
  */
 package angel.roshambo.first.round;
 
+import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.roundresult.RoundResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -41,35 +42,37 @@ public class RoundRestController {
      */
     @GetMapping("/playround")
     @ResponseBody
-    public Mono<RoundResult> theRound(@RequestParam(value="r1", required = true) Integer firstMove, @RequestParam(value="r2", defaultValue = "0") Integer secondMove) {
+    public Mono<RoundResult> theRound(@RequestParam(value="r1", required = true) String firstMove, @RequestParam(value="r2", defaultValue = "Rock") String secondMove) {
+        Mono<RoundResult> res;
+        
         Round round = new Round();
         RoundValue rv1;
         RoundValue rv2;
         
-        Logger.getLogger("REST").log(Level.INFO, "Request arrived!");
-        
+        // First gamer move
         try {
             rv1 = RoundValue.valueOf(firstMove);
         } catch(IllegalArgumentException ex) {
             rv1 = UNKNOWN;
         }
         
+        // Second gamer move
         try {
             rv2 = RoundValue.valueOf(secondMove);
         } catch(IllegalArgumentException ex) {
             rv2 = UNKNOWN;
         }
         
+        // Has been an error?
         if (rv1 != UNKNOWN && rv2 != UNKNOWN) {
             round.setFirstPlayer(rv1);
             round.setSecondPlayer(rv2);
+            res = theService.whoIsWinner(round);
         } else {
-            Logger.getLogger("REST").log(Level.INFO, "Request killed!");
-            return null;
+            res =  theService.winnerIsError();
         }
         
-        Logger.getLogger("REST GAME CONTROLLER").log(Level.INFO, "Request SEND To Service!");
-        return theService.whoIsWinner(round);
+        return res;
     }
     
 }

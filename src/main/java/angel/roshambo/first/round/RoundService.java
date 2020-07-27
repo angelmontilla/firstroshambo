@@ -8,6 +8,7 @@ import angel.roshambo.first.roundresult.RoundResult;
 import org.springframework.stereotype.Service;
 
 import angel.roshambo.first.enums.EndRoundState;
+import angel.roshambo.first.enums.RoundValue;
 import reactor.core.publisher.Mono;
 
 /**
@@ -28,9 +29,7 @@ public class RoundService {
      */
     public Mono<RoundResult> whoIsWinner(Round moves){
         Mono<RoundResult> res;
-        
-        
-        
+
         RoundResult rrRes = new RoundResult();
         
         rrRes.setFirstUser(moves.getFirstPlayer());
@@ -41,4 +40,25 @@ public class RoundService {
         
         return res;
     }
+    
+    /**
+     * <strong>whoIsWinner</strong> Creates an object for indeterminated state
+     * @return Mono - For indetermination
+     * @see RoundResult
+     * @see RoundValue
+     * @see reactor.core.publisher.Mono
+     */
+    public Mono<RoundResult> winnerIsError(){
+        Mono<RoundResult> res;
+
+        RoundResult rrRes = new RoundResult();
+        
+        rrRes.setFirstUser(RoundValue.UNKNOWN);
+        rrRes.setSecondUser(RoundValue.UNKNOWN);
+        rrRes.setRoundResult(EndRoundState.UNKNOWN);
+        
+        res = Mono.just(rrRes);
+        
+        return res;
+    }    
 }

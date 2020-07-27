@@ -5,6 +5,7 @@
 package angel.roshambo.first.enums;
 
 import static angel.roshambo.first.enums.RoundValue.*;
+import com.sun.media.jfxmedia.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,19 +60,19 @@ public class RoundValueTest {
         System.out.println("TESTING valueOf()");
 
         RoundValue expResult = ROCK;
-        RoundValue result = RoundValue.valueOf(0);
+        RoundValue result = RoundValue.valueOf("ROCK");
         assertEquals(expResult, result);
         
         expResult = PAPER;
-        result = RoundValue.valueOf(1);
+        result = RoundValue.valueOf("PAPER");
         assertEquals(expResult, result);
         
         expResult = SCISSORS;
-        result = RoundValue.valueOf(2);
+        result = RoundValue.valueOf("SCISSORS");
         assertEquals(expResult, result);        
         
         expResult = UNKNOWN;
-        result = RoundValue.valueOf(1);
+        result = RoundValue.valueOf("PAPER");
         assertNotEquals(expResult, result);
     }
 
@@ -83,11 +84,10 @@ public class RoundValueTest {
         System.out.println("TESTING ValueOf exception");
         
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            RoundValue iR = RoundValue.valueOf(-1);
+            RoundValue iR = RoundValue.valueOf("Potato");
         });
         
-        assertTrue(exception.getMessage().contains("can't create enum with not allowed values"));       
-
+        assertTrue(exception.getMessage().contains("Potato"));
     }
 
     /**
@@ -107,7 +107,7 @@ public class RoundValueTest {
         result = instance.toString();
         assertEquals(expResult, result);
         
-        instance = valueOf(2);
+        instance = RoundValue.valueOf("SCISSORS");
         expResult = "Scissors";
         result = instance.toString();
         assertEquals(expResult, result);        
