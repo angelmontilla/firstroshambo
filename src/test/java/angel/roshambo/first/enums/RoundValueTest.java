@@ -5,7 +5,6 @@
 package angel.roshambo.first.enums;
 
 import static angel.roshambo.first.enums.RoundValue.*;
-import com.sun.media.jfxmedia.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
