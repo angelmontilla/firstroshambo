@@ -4,6 +4,8 @@
  */
 package angel.roshambo.first.winerstrategy;
 
+import angel.roshambo.first.enums.EndRoundState;
+import angel.roshambo.first.enums.RoundValue;
 import angel.roshambo.first.round.Round;
 import angel.roshambo.first.roundresult.RoundResult;
 
@@ -16,6 +18,24 @@ import angel.roshambo.first.roundresult.RoundResult;
 public class WinerStrategy {
     public RoundResult getWiner(Round theRound) {
         RoundResult res = new RoundResult();
+        
+        switch(theRound.getFirstPlayer()) {
+            case ROCK: {
+                switch(theRound.getSecondPlayer()) {
+                    case ROCK:
+                        res.setFirstUser(RoundValue.ROCK);
+                        res.setSecondUser(RoundValue.ROCK);
+                        res.setRoundResult(EndRoundState.DRAW);
+                        break;
+                }
+                break;
+            }
+            case PAPER:
+            case SCISSORS:
+                res.setFirstUser(RoundValue.UNKNOWN);
+                res.setSecondUser(RoundValue.UNKNOWN);
+                res.setRoundResult(EndRoundState.UNKNOWN);
+        }
         
         return res;
     }
