@@ -4,67 +4,77 @@
  */
 package angel.roshambo.first.round;
 
+import angel.roshambo.first.enums.EndRoundState;
+import angel.roshambo.first.enums.RoundValue;
 import angel.roshambo.first.roundresult.RoundResult;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import reactor.core.publisher.Mono;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import reactor.test.StepVerifier;
 
 /**
  *
  * @author Angel
  */
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class RoundServiceTest {
     
+    @Autowired
+    private RoundService theService;
+    
     public RoundServiceTest() {
-    }
+    }    
     
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("=== STARTING --> SIMPLE JUNIT unitary TEST FOR RoundService ===");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("=== ENDING   --> SIMPLE JUNIT unitary TEST FOR RoundService ===");
     }
     
-    @Before
-    public void setUp() {
-    }
     
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of whoIsWinner method, of class RoundService.
-     */
-    @Test
-    public void testWhoIsWinner() {
-        System.out.println("whoIsWinner");
-        Round moves = null;
-        RoundService instance = new RoundService();
-        Mono<RoundResult> expResult = null;
-        Mono<RoundResult> result = instance.whoIsWinner(moves);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
      * Test of winnerIsError method, of class RoundService.
      */
     @Test
-    public void testWinnerIsError() {
-        System.out.println("winnerIsError");
-        RoundService instance = new RoundService();
-        Mono<RoundResult> expResult = null;
-        Mono<RoundResult> result = instance.winnerIsError();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testWinnerIsError() {        
+        System.out.println("winnerIsError()");
+        Mono<RoundResult> expResult = theService.winnerIsError();
+        RoundResult rr = new RoundResult(RoundValue.UNKNOWN,RoundValue.UNKNOWN,EndRoundState.UNKNOWED);
+        
+        StepVerifier.create(expResult).expectNext(rr).verifyComplete();
+    }
+    
+    /**
+     * Test of whoIsWinner
+     */
+    @Test
+    public void testWhoIsWinner() {
+        System.out.println("whoIsWinner()");
+        Round moves = new Round(RoundValue.PAPER, RoundValue.ROCK);
+        RoundResult rr = new RoundResult(RoundValue.PAPER, RoundValue.ROCK, EndRoundState.FIRST);
+        
+        Mono<RoundResult> expResult = theService.whoIsWinner(moves);
+
+        StepVerifier.create(expResult).expectNext(rr).verifyComplete();
+        
+        
+        moves = new Round(RoundValue.PAPER, RoundValue.SCISSORS);
+        rr = new RoundResult(RoundValue.PAPER, RoundValue.SCISSORS, EndRoundState.SECOND);
+        
+        expResult = theService.whoIsWinner(moves);
+
+        StepVerifier.create(expResult).expectNext(rr).verifyComplete();        
     }
     
 }

@@ -4,10 +4,8 @@
  */
 package angel.roshambo.first.round;
 
-import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.roundresult.RoundResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +15,6 @@ import reactor.core.publisher.Mono;
 
 import angel.roshambo.first.enums.RoundValue;
 import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <b>RoundRestController</b> Is a Rest controller for getting a round result.

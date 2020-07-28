@@ -26,14 +26,17 @@ public class WinerStrategyTest {
     
     public WinerStrategyTest() {
     }
-    
+        
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("=== STARTING --> SIMPLE JUNIT unitary TEST FOR WinnerStrategy ===");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("=== ENDING   --> SIMPLE JUNIT unitary TEST FOR WinnerStrategy ===");
     }
+    
     
     @Before
     public void setUp() {
@@ -55,7 +58,7 @@ public class WinerStrategyTest {
         theRound.setSecondPlayer(RoundValue.UNKNOWN);
         WinerStrategy instance = new WinerStrategy();
         
-        RoundResult result = instance.getWiner(theRound);
+        RoundResult result = WinerStrategy.getWiner(theRound);
         
         RoundResult expResult = new RoundResult();
         expResult.setFirstUser(RoundValue.UNKNOWN);
@@ -77,7 +80,7 @@ public class WinerStrategyTest {
         theRound.setSecondPlayer(RoundValue.ROCK);
         WinerStrategy instance = new WinerStrategy();
         
-        RoundResult result = instance.getWiner(theRound);
+        RoundResult result = WinerStrategy.getWiner(theRound);
         
         RoundResult expResult = new RoundResult();
         expResult.setFirstUser(RoundValue.ROCK);
@@ -97,25 +100,25 @@ public class WinerStrategyTest {
         // ROCK
         
         Round theRound = new Round(ROCK, ROCK);                
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(ROCK, ROCK, DRAW);
         
         assertEquals(expResult, result);
         
         theRound = new Round(ROCK, PAPER);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(ROCK, PAPER, SECOND);
         
         assertEquals(expResult, result);
         
         theRound = new Round(ROCK, SCISSORS);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(ROCK, SCISSORS, FIRST);
         
         assertEquals(expResult, result);
         
         theRound = new Round(ROCK, UNKNOWN);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(ROCK, UNKNOWN, UNKNOWED);
         
         assertEquals(expResult, result);
@@ -123,25 +126,25 @@ public class WinerStrategyTest {
         // PAPER
         
         theRound = new Round(PAPER, ROCK);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(PAPER, ROCK, FIRST);
         
         assertEquals(expResult, result);
         
         theRound = new Round(PAPER, PAPER);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(PAPER, PAPER, DRAW);
         
         assertEquals(expResult, result);
         
         theRound = new Round(PAPER, SCISSORS);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(PAPER, SCISSORS, SECOND);
         
         assertEquals(expResult, result);
 
         theRound = new Round(PAPER, UNKNOWN);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(PAPER, UNKNOWN, UNKNOWED);
         
         assertEquals(expResult, result);
@@ -149,25 +152,25 @@ public class WinerStrategyTest {
         // SCISSORS
         
         theRound = new Round(SCISSORS, ROCK);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(SCISSORS, ROCK, SECOND);
         
         assertEquals(expResult, result);
         
         theRound = new Round(SCISSORS, PAPER);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(SCISSORS, PAPER, FIRST);
         
         assertEquals(expResult, result);
         
         theRound = new Round(SCISSORS, SCISSORS);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(SCISSORS, SCISSORS, DRAW);
         
         assertEquals(expResult, result);
 
         theRound = new Round(SCISSORS, UNKNOWN);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(SCISSORS, UNKNOWN, UNKNOWED);
         
         assertEquals(expResult, result);
@@ -175,25 +178,25 @@ public class WinerStrategyTest {
         // UNKNOWN
         
         theRound = new Round(UNKNOWN, ROCK);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(UNKNOWN, ROCK, UNKNOWED);
         
         assertEquals(expResult, result);
         
         theRound = new Round(UNKNOWN, PAPER);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(UNKNOWN, PAPER, UNKNOWED);
         
         assertEquals(expResult, result);
         
         theRound = new Round(UNKNOWN, SCISSORS);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(UNKNOWN, SCISSORS, UNKNOWED);
         
         assertEquals(expResult, result);
 
         theRound = new Round(UNKNOWN, UNKNOWN);
-        result = instance.getWiner(theRound);
+        result = WinerStrategy.getWiner(theRound);
         expResult = new RoundResult(UNKNOWN, UNKNOWN, UNKNOWED);
         
         assertEquals(expResult, result);
