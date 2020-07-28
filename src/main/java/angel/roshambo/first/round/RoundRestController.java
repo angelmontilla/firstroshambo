@@ -32,9 +32,9 @@ public class RoundRestController {
     
     /**
      * <strong>playround</strong>
-     * @param firstMove - Integer that represents
-     * @param secondMove
-     * @return 
+     * @param firstMove String represents first player move
+     * @param secondMove String represents second player move
+     * @return RoundResult with play result
      */
     @GetMapping("/playround")
     @ResponseBody
