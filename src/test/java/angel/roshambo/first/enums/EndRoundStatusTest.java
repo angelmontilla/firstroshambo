@@ -46,7 +46,7 @@ public class EndRoundStatusTest {
     @Test
     public void testValues() {
         System.out.println("TESTING values()");
-        EndRoundState[] expResult = {FIRST, SECOND, DRAW, UNKNOWN};                   
+        EndRoundState[] expResult = {FIRST, SECOND, DRAW, UNKNOWED};                   
         EndRoundState[] result = EndRoundState.values();
         
         assertArrayEquals(expResult, result);
@@ -82,7 +82,7 @@ public class EndRoundStatusTest {
         result += " " + instance.toString();
         instance = DRAW;
         result += " " + instance.toString();
-        instance = UNKNOWN;
+        instance = UNKNOWED;
         result += " " + instance.toString();        
         
         assertEquals(expResult, result);

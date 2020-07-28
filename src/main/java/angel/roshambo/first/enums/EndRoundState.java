@@ -13,14 +13,14 @@ package angel.roshambo.first.enums;
  * <li><b>FIRST</b> - Represents: First gamer wins</li>
  * <li><b>SECOND</b> - Represents: Second gamer wins</li>
  * <li><b>DRAW</b> - Represents: Tied gamers</li>
- * <li><b>UNKOWN</b> - Represents: Unknown status</li>
+ * <li><b>UNKOWED</b> - Represents: Unknowed status</li>
  * </ul>
  * @author Angel Montilla
  * @version 0.1
  * @see java.lang.Enum
  */
 public enum EndRoundState {
-    FIRST("First"), SECOND("Second"), DRAW("Draw"), UNKNOWN("Unknown");
+    FIRST("First"), SECOND("Second"), DRAW("Draw"), UNKNOWED("Unknowed");
     
     private final String status;
     
