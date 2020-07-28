@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.enums.RoundValue;
+import angel.roshambo.first.winerstrategy.WinerStrategy;
 import reactor.core.publisher.Mono;
 
 /**
@@ -30,12 +31,8 @@ public class RoundService {
     public Mono<RoundResult> whoIsWinner(Round moves){
         Mono<RoundResult> res;
 
-        RoundResult rrRes = new RoundResult();
-        
-        rrRes.setFirstUser(moves.getFirstPlayer());
-        rrRes.setSecondUser(moves.getSecondPlayer());
-        rrRes.setRoundResult(EndRoundState.FIRST);
-        
+        RoundResult rrRes = WinerStrategy.getWiner(moves);
+               
         res = Mono.just(rrRes);
         
         return res;
@@ -55,7 +52,7 @@ public class RoundService {
         
         rrRes.setFirstUser(RoundValue.UNKNOWN);
         rrRes.setSecondUser(RoundValue.UNKNOWN);
-        rrRes.setRoundResult(EndRoundState.UNKNOWN);
+        rrRes.setRoundResult(EndRoundState.UNKNOWED);
         
         res = Mono.just(rrRes);
         

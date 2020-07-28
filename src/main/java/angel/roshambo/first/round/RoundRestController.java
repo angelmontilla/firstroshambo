@@ -44,8 +44,7 @@ public class RoundRestController {
     @ResponseBody
     public Mono<RoundResult> theRound(@RequestParam(value="r1", required = true) String firstMove, @RequestParam(value="r2", defaultValue = "Rock") String secondMove) {
         Mono<RoundResult> res;
-        
-        Round round = new Round();
+                
         RoundValue rv1;
         RoundValue rv2;
         
@@ -65,11 +64,10 @@ public class RoundRestController {
         
         // Has been an error?
         if (rv1 != UNKNOWN && rv2 != UNKNOWN) {
-            round.setFirstPlayer(rv1);
-            round.setSecondPlayer(rv2);
-            res = theService.whoIsWinner(round);
+            
+            res = theService.whoIsWinner(new Round(rv1,rv2));
         } else {
-            res =  theService.winnerIsError();
+            res = theService.winnerIsError();
         }
         
         return res;

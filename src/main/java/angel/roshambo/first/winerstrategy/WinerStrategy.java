@@ -4,10 +4,11 @@
  */
 package angel.roshambo.first.winerstrategy;
 
-import angel.roshambo.first.enums.EndRoundState;
-import angel.roshambo.first.enums.RoundValue;
 import angel.roshambo.first.round.Round;
 import angel.roshambo.first.roundresult.RoundResult;
+
+import static angel.roshambo.first.enums.RoundValue.*;
+import static angel.roshambo.first.enums.EndRoundState.*;
 
 /**
  * <strong>WinerStrategy</strong> Following SOLID pattern we area going to <br>uncople
@@ -16,25 +17,83 @@ import angel.roshambo.first.roundresult.RoundResult;
  * @author Angel
  */
 public class WinerStrategy {
-    public RoundResult getWiner(Round theRound) {
-        RoundResult res = new RoundResult();
+    
+
+    public static RoundResult getWiner(Round theRound) {
+        RoundResult res = new RoundResult(UNKNOWN, UNKNOWN, UNKNOWED);
         
         switch(theRound.getFirstPlayer()) {
-            case ROCK: {
+            case ROCK:
+                res.setFirstUser(ROCK);
                 switch(theRound.getSecondPlayer()) {
                     case ROCK:
-                        res.setFirstUser(RoundValue.ROCK);
-                        res.setSecondUser(RoundValue.ROCK);
-                        res.setRoundResult(EndRoundState.DRAW);
+                        res.setSecondUser(ROCK);
+                        res.setRoundResult(DRAW);
+                        break;
+                    case PAPER:
+                        res.setSecondUser(PAPER);
+                        res.setRoundResult(SECOND);
+                        break;
+                    case SCISSORS:
+                        res.setSecondUser(SCISSORS);
+                        res.setRoundResult(FIRST);
+                        break;                                                
+                    default:
                         break;
                 }
-                break;
-            }
+                break;      
             case PAPER:
+                res.setFirstUser(PAPER);
+                switch(theRound.getSecondPlayer()) {
+                    case ROCK:
+                        res.setSecondUser(ROCK);
+                        res.setRoundResult(FIRST);
+                        break;
+                    case PAPER:
+                        res.setSecondUser(PAPER);
+                        res.setRoundResult(DRAW);                        
+                        break;                        
+                    case SCISSORS:
+                        res.setSecondUser(SCISSORS);
+                        res.setRoundResult(SECOND);
+                        break;                                                
+                    default:
+                        break;                        
+                }
+                break;
             case SCISSORS:
-                res.setFirstUser(RoundValue.UNKNOWN);
-                res.setSecondUser(RoundValue.UNKNOWN);
-                res.setRoundResult(EndRoundState.UNKNOWN);
+                res.setFirstUser(SCISSORS);
+                switch(theRound.getSecondPlayer()) {
+                    case ROCK:
+                        res.setSecondUser(ROCK);
+                        res.setRoundResult(SECOND);
+                        break;
+                    case PAPER:
+                        res.setSecondUser(PAPER);
+                        res.setRoundResult(FIRST);
+                        break;                        
+                    case SCISSORS:
+                        res.setSecondUser(SCISSORS);
+                        res.setRoundResult(DRAW);                        
+                        break;                                                
+                    default:
+                        break;                        
+                }
+                break;
+            case UNKNOWN:
+                switch(theRound.getSecondPlayer()) {
+                    case ROCK:
+                        res.setSecondUser(ROCK);
+                        break;
+                    case PAPER:
+                        res.setSecondUser(PAPER);
+                        break;                        
+                    case SCISSORS:
+                        res.setSecondUser(SCISSORS);
+                        break;                                                
+                    default:
+                        break;                        
+                }
         }
         
         return res;
