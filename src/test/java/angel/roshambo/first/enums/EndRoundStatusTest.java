@@ -11,10 +11,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import static angel.roshambo.first.enums.EndRoundStatus.*;
+import static angel.roshambo.first.enums.EndRoundState.*;
 
 /**
- *
+ * <strong>EndRoundStatusTest</strong> Unitary test for EndRoundState
  * @author Angel
  */
 public class EndRoundStatusTest {
@@ -24,14 +24,16 @@ public class EndRoundStatusTest {
     
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("=== STARTING --> SIMPLE JUNIT unitary TEST FOR ENUMERATION EndRound Status ===");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("=== ENDING   --> SIMPLE JUNIT unitary TEST FOR ENUMERATION EndRound Status ===");
     }
     
     @Before
-    public void setUp() {
+    public void setUp() {        
     }
     
     @After
@@ -39,42 +41,42 @@ public class EndRoundStatusTest {
     }
 
     /**
-     * Test of values method, of class EndRoundStatus.
+     * Test of values method, of class EndRoundState.
      */
     @Test
     public void testValues() {
-        System.out.println("values");
-        EndRoundStatus[] expResult = {FIRST, SECOND, DRAW, UNKNOWN};                   
-        EndRoundStatus[] result = EndRoundStatus.values();
+        System.out.println("TESTING values()");
+        EndRoundState[] expResult = {FIRST, SECOND, DRAW, UNKNOWN};                   
+        EndRoundState[] result = EndRoundState.values();
         
         assertArrayEquals(expResult, result);
     }
 
     /**
-     * Test of valueOf method, of class EndRoundStatus.
+     * Test of valueOf method, of class EndRoundState.
      */
     @Test
     public void testValueOf() {
-        System.out.println("valueOf");
+        System.out.println("TESTING valueOf()");
         String name = "FIRST";
-        EndRoundStatus expResult = FIRST;
-        EndRoundStatus result = EndRoundStatus.valueOf(name);
+        EndRoundState expResult = FIRST;
+        EndRoundState result = EndRoundState.valueOf(name);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of toString method, of class EndRoundStatus.
+     * Test of toString method, of class EndRoundState.
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
+        System.out.println("TESTING toString()");
 
         String expResult = "";
         
-        for (EndRoundStatus egs: EndRoundStatus.values())
+        for (EndRoundState egs: EndRoundState.values())
             expResult += " " + egs.toString();
         
-        EndRoundStatus instance = FIRST;
+        EndRoundState instance = FIRST;
         String result = " " + instance.toString();
         instance = SECOND;
         result += " " + instance.toString();
