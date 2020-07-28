@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  * <strong>Round</strong> Following DTO design pattern a Round representation
  * <p>It represents a round send by user</p>
- * <p>It is more simple representation</p>
+ * <p>It is a simple representation</p>
  * @author Angel
  */
 @AllArgsConstructor

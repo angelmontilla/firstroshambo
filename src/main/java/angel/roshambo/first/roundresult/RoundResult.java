@@ -11,7 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *
+ * <strong>RoundResult</strong> Fllowinf DTO design pattern This is the result of the round
+ * <p>It comes determinated by {@link RoundValue} possible moves and <br> {@link EndRoundState}
+ * as possible results</p>
  * @author Angel
  */
 @AllArgsConstructor

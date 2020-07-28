@@ -4,11 +4,17 @@
  */
 package angel.roshambo.first.round;
 
+import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.roundresult.RoundResult;
 import org.springframework.stereotype.Service;
 
-import angel.roshambo.first.enums.EndRoundState;
 import angel.roshambo.first.enums.RoundValue;
+import static angel.roshambo.first.enums.RoundValue.*;
+import static angel.roshambo.first.enums.EndRoundState.*;
+import angel.roshambo.first.winerstrategy.IWinnerStrategy;
+import angel.roshambo.first.winerstrategy.PaperStrategy;
+import angel.roshambo.first.winerstrategy.RockStrategy;
+import angel.roshambo.first.winerstrategy.ScissorsStrategy;
 import angel.roshambo.first.winerstrategy.WinerStrategy;
 import reactor.core.publisher.Mono;
 
@@ -28,14 +34,29 @@ public class RoundService {
      * @return Mono - that preserves move and result
      * @see RoundResult
      */
-    public Mono<RoundResult> whoIsWinner(Round moves){
-        Mono<RoundResult> res;
-
-        RoundResult rrRes = WinerStrategy.getWiner(moves);
-               
-        res = Mono.just(rrRes);
+    public Mono<RoundResult> whoIsWinner(Round moves){        
+        RoundResult res = new RoundResult(UNKNOWN, UNKNOWN, UNKNOWED);        
         
-        return res;
+        if (moves.getFirstPlayer() != UNKNOWN && moves.getSecondPlayer() != UNKNOWN) {            
+            WinerStrategy strategy = new WinerStrategy();
+            IWinnerStrategy aplyStrategy = null;
+            
+            if (moves.getFirstPlayer() == ROCK)
+                aplyStrategy = new RockStrategy();
+
+            if (moves.getFirstPlayer() == PAPER)
+                aplyStrategy = new PaperStrategy();
+
+            if (moves.getFirstPlayer() == SCISSORS)
+                aplyStrategy = new ScissorsStrategy();
+
+            strategy.Context(aplyStrategy);
+            res.setFirstUser(moves.getFirstPlayer());
+            res.setSecondUser(moves.getSecondPlayer());
+            res.setRoundResult(EndRoundState.valueOf(strategy.executeStrategy(moves.getSecondPlayer().toString())));
+        }               
+        
+        return Mono.just(res);
     }
     
     /**

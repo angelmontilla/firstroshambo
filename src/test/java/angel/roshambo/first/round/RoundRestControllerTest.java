@@ -41,10 +41,12 @@ public class RoundRestControllerTest {
     
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("=== STARTING --> SIMPLE JUNIT unitary TEST FOR CONTROLLER RoundRest ===");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("=== ENDING   --> SIMPLE JUNIT unitary TEST FOR CONTROLLER RoundRest ===");
     }
     
     @Before
@@ -60,7 +62,7 @@ public class RoundRestControllerTest {
      */
     @Test
     public void testTheRound() {
-        System.out.println("theRound");
+        System.out.println("TESTING A ROUND");
         
         RoundResult rr = new RoundResult(RoundValue.PAPER, RoundValue.ROCK, EndRoundState.FIRST);
         Mono<RoundResult> monoRr = Mono.just(rr);
@@ -81,7 +83,7 @@ public class RoundRestControllerTest {
      */
     @Test
     public void testTheRoundFails() {
-        System.out.println("theRound fails");
+        System.out.println("TESTING ROUND MUST FAILS");
         
         RoundResult rr = new RoundResult(RoundValue.UNKNOWN, RoundValue.UNKNOWN, EndRoundState.UNKNOWED);
         Mono<RoundResult> monoRr = Mono.just(rr);

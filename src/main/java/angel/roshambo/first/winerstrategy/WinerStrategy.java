@@ -4,12 +4,6 @@
  */
 package angel.roshambo.first.winerstrategy;
 
-import angel.roshambo.first.round.Round;
-import angel.roshambo.first.roundresult.RoundResult;
-
-import static angel.roshambo.first.enums.RoundValue.*;
-import static angel.roshambo.first.enums.EndRoundState.*;
-
 /**
  * <strong>WinerStrategy</strong> Following SOLID pattern we area going to <br>uncople
  * Round and RoundResult classes.
@@ -17,85 +11,28 @@ import static angel.roshambo.first.enums.EndRoundState.*;
  * @author Angel
  */
 public class WinerStrategy {
-    
 
-    public static RoundResult getWiner(Round theRound) {
-        RoundResult res = new RoundResult(UNKNOWN, UNKNOWN, UNKNOWED);
-        
-        switch(theRound.getFirstPlayer()) {
-            case ROCK:
-                res.setFirstUser(ROCK);
-                switch(theRound.getSecondPlayer()) {
-                    case ROCK:
-                        res.setSecondUser(ROCK);
-                        res.setRoundResult(DRAW);
-                        break;
-                    case PAPER:
-                        res.setSecondUser(PAPER);
-                        res.setRoundResult(SECOND);
-                        break;
-                    case SCISSORS:
-                        res.setSecondUser(SCISSORS);
-                        res.setRoundResult(FIRST);
-                        break;                                                
-                    default:
-                        break;
-                }
-                break;      
-            case PAPER:
-                res.setFirstUser(PAPER);
-                switch(theRound.getSecondPlayer()) {
-                    case ROCK:
-                        res.setSecondUser(ROCK);
-                        res.setRoundResult(FIRST);
-                        break;
-                    case PAPER:
-                        res.setSecondUser(PAPER);
-                        res.setRoundResult(DRAW);                        
-                        break;                        
-                    case SCISSORS:
-                        res.setSecondUser(SCISSORS);
-                        res.setRoundResult(SECOND);
-                        break;                                                
-                    default:
-                        break;                        
-                }
-                break;
-            case SCISSORS:
-                res.setFirstUser(SCISSORS);
-                switch(theRound.getSecondPlayer()) {
-                    case ROCK:
-                        res.setSecondUser(ROCK);
-                        res.setRoundResult(SECOND);
-                        break;
-                    case PAPER:
-                        res.setSecondUser(PAPER);
-                        res.setRoundResult(FIRST);
-                        break;                        
-                    case SCISSORS:
-                        res.setSecondUser(SCISSORS);
-                        res.setRoundResult(DRAW);                        
-                        break;                                                
-                    default:
-                        break;                        
-                }
-                break;
-            case UNKNOWN:
-                switch(theRound.getSecondPlayer()) {
-                    case ROCK:
-                        res.setSecondUser(ROCK);
-                        break;
-                    case PAPER:
-                        res.setSecondUser(PAPER);
-                        break;                        
-                    case SCISSORS:
-                        res.setSecondUser(SCISSORS);
-                        break;                                                
-                    default:
-                        break;                        
-                }
-        }
-        
-        return res;
+    /* NO JAVADOC
+     * Interface for winner strategy
+     */
+    private IWinnerStrategy iWinnerStrategy;
+    
+    /**
+     * <strong>Context</strong> Set strategy for determining the winner
+     * <p>Set the way for determinate winner</p>
+     * @param iWinnerStrategy
+     */
+    public void Context(IWinnerStrategy iWinnerStrategy) {
+        this.iWinnerStrategy = iWinnerStrategy;
+    }
+    
+    /**
+     * <strong>executeStrategy</strong> Run correct strategy
+     * <p>Executing the strategy we'll get the winner</p>
+     * @param second String of move
+     * @return String of winner in strategicall solution
+     */
+    public String executeStrategy(String second) {
+        return iWinnerStrategy.isWinner(second);
     }
 }

@@ -5,10 +5,8 @@
 package angel.roshambo.first.winerstrategy;
 
 import angel.roshambo.first.enums.EndRoundState;
-import angel.roshambo.first.enums.RoundValue;
 import static angel.roshambo.first.enums.RoundValue.*;
 import static angel.roshambo.first.enums.EndRoundState.*;
-import angel.roshambo.first.round.Round;
 import angel.roshambo.first.roundresult.RoundResult;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
+
 
 /**
  *
@@ -46,160 +44,86 @@ public class WinerStrategyTest {
     public void tearDown() {
     }
 
-    /**
-     * 1st Test of getWiner method, of class WinerStrategy.
-     */
-    @Ignore
-    @Test    
-    public void testGetWiner1() {
-        System.out.println("getWiner");
-        Round theRound = new Round();
-        theRound.setFirstPlayer(RoundValue.UNKNOWN);
-        theRound.setSecondPlayer(RoundValue.UNKNOWN);
-        WinerStrategy instance = new WinerStrategy();
-        
-        RoundResult result = WinerStrategy.getWiner(theRound);
-        
-        RoundResult expResult = new RoundResult();
-        expResult.setFirstUser(RoundValue.UNKNOWN);
-        expResult.setSecondUser(RoundValue.UNKNOWN);
-        expResult.setRoundResult(EndRoundState.UNKNOWED);
-        
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * 2nd Test of getWiner method, of class WinerStrategy.
-     */
-    @Ignore
-    @Test    
-    public void testGetWiner2() {
-        System.out.println("getWiner");
-        Round theRound = new Round();
-        theRound.setFirstPlayer(RoundValue.ROCK);
-        theRound.setSecondPlayer(RoundValue.ROCK);
-        WinerStrategy instance = new WinerStrategy();
-        
-        RoundResult result = WinerStrategy.getWiner(theRound);
-        
-        RoundResult expResult = new RoundResult();
-        expResult.setFirstUser(RoundValue.ROCK);
-        expResult.setSecondUser(RoundValue.ROCK);
-        expResult.setRoundResult(EndRoundState.DRAW);
-        
-        assertEquals(expResult, result);
-    }
-    
     @Test
     public void testGetWinnerN() {
-        System.out.println("getWiner");
-        WinerStrategy instance = new WinerStrategy();
+        System.out.println("TESTING getWiner");
+        
+        WinerStrategy strategy = new WinerStrategy();
+        IWinnerStrategy aplyStrategy;
         RoundResult expResult;
         RoundResult result;
         
-        // ROCK
-        
-        Round theRound = new Round(ROCK, ROCK);                
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(ROCK, ROCK, DRAW);
-        
-        assertEquals(expResult, result);
-        
-        theRound = new Round(ROCK, PAPER);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(ROCK, PAPER, SECOND);
+        // ROCK        
+        aplyStrategy = new RockStrategy();
+        strategy.Context(aplyStrategy);
+        result = new RoundResult(ROCK, ROCK, DRAW);
+        expResult = new RoundResult(ROCK, ROCK, EndRoundState.valueOf(strategy.executeStrategy("ROCK")));
         
         assertEquals(expResult, result);
         
-        theRound = new Round(ROCK, SCISSORS);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(ROCK, SCISSORS, FIRST);
+        result = new RoundResult(ROCK, SCISSORS, FIRST);
+        expResult = new RoundResult(ROCK, SCISSORS, EndRoundState.valueOf(strategy.executeStrategy("SCISSORS")));
         
         assertEquals(expResult, result);
+                        
+        result = new RoundResult(ROCK, PAPER, SECOND);
+        expResult = new RoundResult(ROCK, PAPER, EndRoundState.valueOf(strategy.executeStrategy("PAPER")));
         
-        theRound = new Round(ROCK, UNKNOWN);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(ROCK, UNKNOWN, UNKNOWED);
+        assertEquals(expResult, result);
+                
+        result = new RoundResult(ROCK, UNKNOWN, UNKNOWED);
+        expResult = new RoundResult(ROCK, UNKNOWN, EndRoundState.valueOf(strategy.executeStrategy("UNKNOWN")));
         
         assertEquals(expResult, result);
         
         // PAPER
         
-        theRound = new Round(PAPER, ROCK);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(PAPER, ROCK, FIRST);
+        aplyStrategy = new PaperStrategy();
+        strategy.Context(aplyStrategy);
+        result = new RoundResult(PAPER, PAPER, DRAW);
+        expResult = new RoundResult(PAPER, PAPER, EndRoundState.valueOf(strategy.executeStrategy("PAPER")));
         
         assertEquals(expResult, result);
         
-        theRound = new Round(PAPER, PAPER);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(PAPER, PAPER, DRAW);
+        result = new RoundResult(PAPER, ROCK, FIRST);
+        expResult = new RoundResult(PAPER, ROCK, EndRoundState.valueOf(strategy.executeStrategy("ROCK")));
         
         assertEquals(expResult, result);
         
-        theRound = new Round(PAPER, SCISSORS);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(PAPER, SCISSORS, SECOND);
+        result = new RoundResult(PAPER, SCISSORS, SECOND);
+        expResult = new RoundResult(PAPER, SCISSORS, EndRoundState.valueOf(strategy.executeStrategy("SCISSORS")));
         
         assertEquals(expResult, result);
 
-        theRound = new Round(PAPER, UNKNOWN);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(PAPER, UNKNOWN, UNKNOWED);
+        result = new RoundResult(PAPER, UNKNOWN, UNKNOWED);
+        expResult = new RoundResult(PAPER, UNKNOWN, EndRoundState.valueOf(strategy.executeStrategy("UNKNOWN")));
         
         assertEquals(expResult, result);
         
         // SCISSORS
         
-        theRound = new Round(SCISSORS, ROCK);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(SCISSORS, ROCK, SECOND);
+        aplyStrategy = new ScissorsStrategy();
+        strategy.Context(aplyStrategy);
+        result = new RoundResult(SCISSORS, SCISSORS, DRAW);
+        expResult = new RoundResult(SCISSORS, SCISSORS, EndRoundState.valueOf(strategy.executeStrategy("SCISSORS")));
         
         assertEquals(expResult, result);
         
-        theRound = new Round(SCISSORS, PAPER);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(SCISSORS, PAPER, FIRST);
+        result = new RoundResult(SCISSORS, PAPER, FIRST);
+        expResult = new RoundResult(SCISSORS, PAPER, EndRoundState.valueOf(strategy.executeStrategy("PAPER")));
         
         assertEquals(expResult, result);
         
-        theRound = new Round(SCISSORS, SCISSORS);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(SCISSORS, SCISSORS, DRAW);
-        
-        assertEquals(expResult, result);
-
-        theRound = new Round(SCISSORS, UNKNOWN);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(SCISSORS, UNKNOWN, UNKNOWED);
+        result = new RoundResult(SCISSORS, ROCK, SECOND);
+        expResult = new RoundResult(SCISSORS, ROCK, EndRoundState.valueOf(strategy.executeStrategy("Rock")));
         
         assertEquals(expResult, result);
         
-        // UNKNOWN
-        
-        theRound = new Round(UNKNOWN, ROCK);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(UNKNOWN, ROCK, UNKNOWED);
-        
-        assertEquals(expResult, result);
-        
-        theRound = new Round(UNKNOWN, PAPER);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(UNKNOWN, PAPER, UNKNOWED);
-        
-        assertEquals(expResult, result);
-        
-        theRound = new Round(UNKNOWN, SCISSORS);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(UNKNOWN, SCISSORS, UNKNOWED);
+        result = new RoundResult(SCISSORS, UNKNOWN, UNKNOWED);
+        expResult = new RoundResult(SCISSORS, UNKNOWN, EndRoundState.valueOf(strategy.executeStrategy("Unknow")));
         
         assertEquals(expResult, result);
 
-        theRound = new Round(UNKNOWN, UNKNOWN);
-        result = WinerStrategy.getWiner(theRound);
-        expResult = new RoundResult(UNKNOWN, UNKNOWN, UNKNOWED);
-        
-        assertEquals(expResult, result);
     }
     
     
