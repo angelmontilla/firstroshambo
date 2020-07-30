@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * <p>In this first aproximation to rock-paper-scissors it is not necesary<br>
  * using more patter design that Publisher/Subscriber, IoC where we are using<br>
  * a non-blocking, asynchronous and event directed service</p>
+ * <p>We have open origin for Angular 9 using from local host</p>
  * @author Angel
  */
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
