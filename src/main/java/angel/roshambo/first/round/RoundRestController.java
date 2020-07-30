@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 import angel.roshambo.first.enums.RoundValue;
 import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * <b>RoundRestController</b> Is a Rest controller for getting a round result.
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * <p>We have open origin for Angular 9 using from local host</p>
  * @author Angel
  */
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET,RequestMethod.POST})
 @RestController()
 @RequestMapping(path="/roshambo")
 public class RoundRestController {
