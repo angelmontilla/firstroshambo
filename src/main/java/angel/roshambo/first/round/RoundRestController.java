@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 import angel.roshambo.first.enums.RoundValue;
 import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * <b>RoundRestController</b> Is a Rest controller for getting a round result.
@@ -23,6 +24,7 @@ import static angel.roshambo.first.enums.RoundValue.UNKNOWN;
  * a non-blocking, asynchronous and event directed service</p>
  * @author Angel
  */
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController()
 @RequestMapping(path="/roshambo")
 public class RoundRestController {
